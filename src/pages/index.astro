@@ -589,13 +589,15 @@ const newsArticles: NewsArticle[] = await fetchNews();
               <span>{post.data.category}</span>
               <h3>{post.data.title}</h3>
               <!-- Buttons Section -->
-<center>
+
 <div class="buttons flex gap-4">
+<center>
   <a href={`/blog/${heroPost?.slug}/`}>
 Read Article
   </a>
-</div>
 </center>
+</div>
+
             </div>
           </div>
         ))}
@@ -615,7 +617,7 @@ Read Article
             <div class="card-content">
               <h3>{article.title}</h3>
               <p>{new Date(article.published).toLocaleDateString()}</p>
-              <a href={article.url} target="_blank">View Article</a>
+             <center> <a href={article.url} target="_blank">View Article</a></center>
             </div>
           </div>
         ))}
