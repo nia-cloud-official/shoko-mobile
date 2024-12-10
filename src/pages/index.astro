@@ -592,7 +592,7 @@ const newsArticles: NewsArticle[] = await fetchNews();
 <center>
 <div class="buttons flex gap-4">
   <a href={`/blog/${heroPost?.slug}/`}>
-    <button class="modern-btn">Read Article</button>
+Read Article
   </a>
 </div>
 </center>
@@ -611,7 +611,7 @@ const newsArticles: NewsArticle[] = await fetchNews();
       <div class="scroll-container">
         {newsArticles.map((article) => (
           <div class="scroll-card">
-            <img src={article.image || '/default-image.jpg'} alt={article.title} />
+            <img src={article.image || 'https://media.istockphoto.com/id/1197831888/vector/male-hand-holding-megaphone-with-breaking-news-speech-bubble-loudspeaker-banner-for-business.jpg'} alt={article.title} />
             <div class="card-content">
               <h3>{article.title}</h3>
               <p>{new Date(article.published).toLocaleDateString()}</p>
