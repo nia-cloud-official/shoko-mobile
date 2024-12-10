@@ -493,16 +493,6 @@ const newsArticles: NewsArticle[] = await fetchNews();
   height: 300%;
   opacity: 0;
 }
-/* Discover Section */
-.discover-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #1a1a1a;
-  color: #fff;
-  padding: 1rem;
-  border-bottom: 1px solid #333;
-}
 
 .discover-title {
   font-size: 1.5rem;
@@ -562,7 +552,9 @@ const newsArticles: NewsArticle[] = await fetchNews();
     <!-- Discover Header -->
     <!-- Top Discover Section -->
 <div class="discover-header">
+<center>
   <h1 class="discover-title">Discover</h1>
+</center>
 </div>
 
 <!-- Main Menu -->
@@ -594,14 +586,13 @@ const newsArticles: NewsArticle[] = await fetchNews();
               <span>{post.data.category}</span>
               <h3>{post.data.title}</h3>
               <!-- Buttons Section -->
+<center>
 <div class="buttons flex gap-4">
   <a href={`/blog/${heroPost?.slug}/`}>
     <button class="modern-btn">Read Article</button>
   </a>
-  <button class="modern-btn secondary-btn">
-     Share
-  </button>
 </div>
+</center>
             </div>
           </div>
         ))}
