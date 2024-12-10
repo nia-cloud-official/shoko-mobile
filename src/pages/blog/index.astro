@@ -5,38 +5,64 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { fetchNews } from '../../utils/fetchNews';  // Import the fetchNews function
 
+// Fetch the local blog posts
 const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
+
+// Fetch the news articles from the API
+const newsArticles = await fetchNews();
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<div class="w-max m-auto">
-				<ul class="">
-					{
-						posts.map((post) => (
-							<li class="">
-								<a href={`/blog/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</div>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="w-max m-auto">
+        <ul class="">
+          <!-- Render News Articles -->
+          {
+            newsArticles.map((article) => (
+              <li class="">
+                <a href={article.url} target="_blank">
+                  <img 
+                    width={720} 
+                    height={360} 
+                    src={article.urlToImage || '/default-image.jpg'}  // Default image if none provided
+                    alt={article.title}
+                  />
+                  <h4 class="title">{article.title}</h4>
+                  <p class="date">
+                    {new Date(article.publishedAt).toLocaleDateString()}
+                  </p>
+                </a>
+              </li>
+            ))
+          }
+
+          <!-- Render Markdown-based Blog Posts -->
+          {
+            posts.map((post) => (
+              <li class="">
+                <a href={`/blog/${post.slug}/`}>
+                  <img width={720} height={360} src={post.data.heroImage} alt="" />
+                  <h4 class="title">{post.data.title}</h4>
+                  <p class="date">
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </main>
+    <Footer />
+  </body>
 </html>

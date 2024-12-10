@@ -1,0 +1,13 @@
+---
+const { title, description, source, url, date } = Astro.props;
+---
+
+## {title}
+
+**Source**: [{source.name}]({source.url})
+
+*Published on {new Date(date).toLocaleDateString()}*
+
+{description}
+
+[Read more]({url})
