@@ -92,7 +92,7 @@ const newsArticles = await fetchNews();
 					
 					{/* Render News Articles */}
 					{newsArticles.map((article) => (
-						<div key={article.url} class="flex-shrink-0 w-[300px] md:w-[350px] bg-gray-800 rounded-2xl p-4 space-y-2">
+						<div class="flex-shrink-0 w-[300px] md:w-[350px] bg-gray-800 rounded-2xl p-4 space-y-2">
 							<a href={article.url} target="_blank">
 								<img 
 									src={article.image || '/default-image.jpg'} 
