@@ -17,6 +17,15 @@ const newsArticles = await fetchNews();
 
 // Debugging: Log the fetched news articles
 console.log('News Articles:', newsArticles);
+
+// Define the type for the news articles for TypeScript
+type NewsArticle = {
+  title: string;
+  published: string;
+  url: string;
+  image: string | null;  
+};
+
 ---
 
 <!doctype html>
@@ -33,13 +42,13 @@ console.log('News Articles:', newsArticles);
           <!-- Render News Articles from Currents API -->
           {
             newsArticles.length > 0 ? (
-              newsArticles.map((article) => (
+              newsArticles.map((article: NewsArticle) => (
                 <li class="">
                   <a href={article.url} target="_blank">
                     <img 
                       width={720} 
                       height={360} 
-                      src={article.image || '/default-image.jpg'}  // Use a default image if none provided
+                      src={article.image || 'https://media.istockphoto.com/id/1197831888/vector/male-hand-holding-megaphone-with-breaking-news-speech-bubble-loudspeaker-banner-for-business.jpg'}
                       alt={article.title}
                     />
                     <h4 class="title">{article.title}</h4>
