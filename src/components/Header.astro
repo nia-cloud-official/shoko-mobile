@@ -8,9 +8,16 @@ interface Props {
 const {isHero = false} = Astro.props;
 ---
 
+<style>
+.candy { 
+background-image: url("https://i.ibb.co/bRGzm2L/shoko-2.png");
+background-size:cover;
+width:260px;
+</style>
+
 <header class={`${isHero ? "text-white" : ""} h-[10vh] px-4 md:px-8`}>
 	<nav class="w-full h-full flex items-center">
-		<img src="https://i.ibb.co/bRGzm2L/shoko-2.png" style="height:60px"/>
+		<div class="candy" style="height:60px"></div>
 		<nav class="w-1/2">
 			<ul class="flex justify-end gap-4">
 				<li class={`hidden md:block ${isHero ? "border-white hover:bg-white hover:text-black" : "border-black hover:bg-black hover:text-white"} flex items-center border-2 border-opacity-70 rounded-3xl px-4 py-2 cursor-pointer duration-400`}>
