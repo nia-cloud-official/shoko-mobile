@@ -31,44 +31,44 @@ const newsArticles: NewsArticle[] = await fetchNews();
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
+      /* Universal Styling */
       body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Poppins', sans-serif;
         background-color: #000;
         color: #fff;
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
       }
 
-      /* Discover Header */
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* Discover Section Header */
       .discover-header {
-        background-image: url('https://wallpaperaccess.com/full/359767.jpg'); /* Replace with globe image */
+        background-image: url('https://wallpaperaccess.com/full/359767.jpg'); /* Replace with the globe image */
         background-size: cover;
         background-position: center;
-        height: 200px;
+        height: 300px;
         display: flex;
         align-items: center;
         justify-content: center;
-        text-transform: uppercase;
-        font-size: 3rem;
-        font-weight: bold;
-        color: white;
         position: relative;
+        font-size: 2.5rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #fff;
+        z-index: 1;
+        overflow: hidden;
       }
 
       .discover-header::before {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-        z-index: 1;
-      }
-
-      .discover-header h1 {
-        z-index: 2;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 1));
+        z-index: -1;
       }
 
       /* Section Styles */
@@ -76,18 +76,18 @@ const newsArticles: NewsArticle[] = await fetchNews();
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 1rem 1rem 0;
+        padding: 1rem 2rem;
       }
 
       .section-header h2 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         font-weight: bold;
+        letter-spacing: 0.05em;
       }
 
       .section-header a {
-        font-size: 0.9rem;
-        color: #aaa;
-        text-decoration: none;
+        font-size: 1rem;
+        color: #888;
         transition: color 0.3s;
       }
 
@@ -95,33 +95,32 @@ const newsArticles: NewsArticle[] = await fetchNews();
         color: #fff;
       }
 
-      /* Grid Cards */
+      /* Grid Layout for Cards */
       .grid-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 16px;
-        padding: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        padding: 1rem 2rem;
       }
 
       .card {
-        background: #1c1c1c;
+        background: #1a1a1a;
         border-radius: 16px;
         overflow: hidden;
-        position: relative;
-        color: white;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s, box-shadow 0.3s;
       }
 
       .card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
       }
 
       .card img {
         width: 100%;
-        height: 180px;
+        height: 200px;
         object-fit: cover;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s;
       }
 
       .card:hover img {
@@ -130,25 +129,43 @@ const newsArticles: NewsArticle[] = await fetchNews();
 
       .card-content {
         padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .card-content span {
+        font-size: 0.9rem;
+        color: #ff8800;
       }
 
       .card-content h3 {
-        font-size: 1.1rem;
-        margin: 0;
+        font-size: 1.2rem;
+        font-weight: bold;
       }
 
-      .card-content p {
+      .card-content a {
+        color: #fff;
         font-size: 0.9rem;
-        color: #aaa;
-        margin: 0.5rem 0 0;
+        padding: 0.5rem 1rem;
+        border: 1px solid #ff8800;
+        border-radius: 8px;
+        margin-top: 1rem;
+        text-align: center;
+        transition: all 0.3s;
       }
 
-      /* Trending Scroll Section */
+      .card-content a:hover {
+        background: #ff8800;
+        color: #000;
+      }
+
+      /* Trending Horizontal Scroll */
       .scroll-container {
         display: flex;
         overflow-x: auto;
-        gap: 16px;
-        padding: 1rem;
+        padding: 1rem 2rem;
+        gap: 1rem;
       }
 
       .scroll-container::-webkit-scrollbar {
@@ -157,35 +174,34 @@ const newsArticles: NewsArticle[] = await fetchNews();
 
       .scroll-card {
         flex-shrink: 0;
-        width: 280px;
-        background: #1c1c1c;
+        width: 250px;
+        background: #1a1a1a;
         border-radius: 16px;
         overflow: hidden;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s;
       }
 
       .scroll-card:hover {
         transform: translateY(-8px);
       }
 
-      /* Navigation Bar */
+      /* Bottom Navigation Bar */
       .navbar {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        background: #1c1c1c;
+        background: #1a1a1a;
         padding: 1rem;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
       }
 
       .navbar a {
-        color: #aaa;
         font-size: 1.2rem;
-        text-decoration: none;
+        color: #888;
         transition: color 0.3s;
       }
 
@@ -195,15 +211,19 @@ const newsArticles: NewsArticle[] = await fetchNews();
 
       @media (min-width: 768px) {
         .discover-header {
-          height: 300px;
+          height: 400px;
         }
 
         .discover-header h1 {
-          font-size: 4rem;
+          font-size: 3.5rem;
         }
 
         .section-header h2 {
-          font-size: 2rem;
+          font-size: 2.2rem;
+        }
+
+        .grid-container {
+          padding: 2rem 3rem;
         }
       }
     </style>
@@ -225,15 +245,16 @@ const newsArticles: NewsArticle[] = await fetchNews();
         <a href="#">See All</a>
       </div>
       <div class="grid-container">
-        {heroPost && (
+        {posts.map((post) => (
           <div class="card">
-            <img src={heroPost.data.heroImage} alt={heroPost.data.title} />
+            <img src={post.data.heroImage} alt={post.data.title} />
             <div class="card-content">
-              <span>{heroPost.data.category}</span>
-              <h3>{heroPost.data.title}</h3>
+              <span>{post.data.category}</span>
+              <h3>{post.data.title}</h3>
+              <a href={`/blog/${post.slug}`}>Read More</a>
             </div>
           </div>
-        )}
+        ))}
       </div>
     </section>
 
@@ -250,18 +271,19 @@ const newsArticles: NewsArticle[] = await fetchNews();
             <div class="card-content">
               <h3>{article.title}</h3>
               <p>{new Date(article.published).toLocaleDateString()}</p>
+              <a href={article.url} target="_blank">View Article</a>
             </div>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Navigation -->
+    <!-- Bottom Navigation -->
     <nav class="navbar">
-      <a href="#">Home</a>
-      <a href="#">Discover</a>
-      <a href="#">Trending</a>
-      <a href="#">Profile</a>
+      <a href="/">Home</a>
+      <a href="#discover">Discover</a>
+      <a href="#trending">Trending</a>
+      <a href="#profile">Profile</a>
     </nav>
 
     <Footer />
