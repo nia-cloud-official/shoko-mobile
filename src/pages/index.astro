@@ -80,19 +80,44 @@ const newsArticles: NewsArticle[] = await fetchNews();
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
   font-size: 0.8rem;
   color: #888;
+  transition: transform 0.3s, color 0.3s;
   position: relative;
-  transition: color 0.3s, transform 0.3s;
 }
 
 .nav-item:hover {
   color: #fff;
+  transform: scale(1.1);
 }
 
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-item:hover::before {
+  content: attr(data-label);
+  position: absolute;
+  bottom: -2.5rem;
+  background: #ff8800;
+  color: #000;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  opacity: 1;
+  transform: translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.nav-item::before {
+  opacity: 0;
+}
+
+/* Add smooth fade-in animation */
 .nav-item:hover .icon {
   transform: scale(1.2);
+  color: #ff8800;
 }
 
 .icon {
@@ -267,6 +292,80 @@ const newsArticles: NewsArticle[] = await fetchNews();
         text-align: center;
         transition: all 0.3s;
       }
+/* Main Menu Styles */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: flex-end;
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+}
+
+.menu-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.menu-content {
+  background: #121212;
+  width: 75%;
+  max-width: 400px;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.menu-content .close-menu {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  background: none;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-content ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.menu-content li {
+  font-size: 1.2rem;
+}
+
+.menu-content a {
+  text-decoration: none;
+  color: #ff8800;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.menu-content a:hover {
+  color: #fff;
+}
+
+.menu.active {
+  transform: translateX(0);
+}
+
 
       .card-content a:hover {
         background: #ff8800;
@@ -322,6 +421,119 @@ const newsArticles: NewsArticle[] = await fetchNews();
         color: #fff;
       }
 
+/* Button Base Styles */
+.modern-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Primary Button Style */
+.modern-btn {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  color: #fff;
+  box-shadow: 0px 8px 15px rgba(255, 126, 95, 0.4);
+}
+
+.modern-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 10px 20px rgba(255, 126, 95, 0.5);
+}
+
+/* Secondary Button Style */
+.secondary-btn {
+  background: #222;
+  color: #fff;
+  border: 2px solid #ff8800;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.secondary-btn:hover {
+  background: #ff8800;
+  color: #000;
+  border-color: #fff;
+}
+
+.secondary-btn .icon {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+/* Ripple Animation */
+.modern-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: -1;
+}
+
+.modern-btn:hover::before {
+  width: 300%;
+  height: 300%;
+  opacity: 0;
+}
+/* Discover Section */
+.discover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.discover-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.menu-btn-top {
+  background: #222;
+  border: none;
+  border-radius: 50%;
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.menu-btn-top .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #ff8800;
+}
+
+.menu-btn-top:hover {
+  background: #ff8800;
+  transform: scale(1.1);
+}
+
+.menu-btn-top:active {
+  transform: scale(0.95);
+}
+
+
       @media (min-width: 768px) {
         .discover-header {
           height: 400px;
@@ -345,11 +557,32 @@ const newsArticles: NewsArticle[] = await fetchNews();
     <Header />
 
     <!-- Discover Header -->
-    <section>
-      <div class="discover-header">
-        <h1>Discover</h1>
-      </div>
-    </section>
+    <!-- Top Discover Section -->
+<div class="discover-header flex items-center justify-between p-4">
+  <h1 class="discover-title">Discover</h1>
+  <button id="menu-toggle" class="menu-btn-top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="4" y1="12" x2="20" y2="12" />
+      <line x1="4" y1="18" x2="20" y2="18" />
+    </svg>
+  </button>
+</div>
+
+<!-- Main Menu -->
+<div id="main-menu" class="menu hidden">
+  <div class="menu-overlay"></div>
+  <div class="menu-content">
+    <button class="close-menu" id="menu-close">&times;</button>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/discover">Discover</a></li>
+      <li><a href="/trending">Trending</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</div>
 
     <!-- Featured Section -->
     <section>
@@ -364,7 +597,18 @@ const newsArticles: NewsArticle[] = await fetchNews();
             <div class="card-content">
               <span>{post.data.category}</span>
               <h3>{post.data.title}</h3>
-              <a href={`/blog/${post.slug}`}>Read More</a>
+              <!-- Buttons Section -->
+<div class="buttons flex gap-4">
+  <a href={`/blog/${heroPost?.slug}/`}>
+    <button class="modern-btn">Read Article</button>
+  </a>
+  <button class="modern-btn secondary-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+    </svg>
+    <span>Share</span>
+  </button>
+</div>
             </div>
           </div>
         ))}
@@ -392,7 +636,7 @@ const newsArticles: NewsArticle[] = await fetchNews();
     </section>
 
     <!-- Bottom Navigation -->
-    <!-- Bottom Navigation -->
+<!-- Bottom Navigation -->
 <nav class="navbar">
   <a href="/" class="nav-item" data-label="Home">
     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -420,13 +664,36 @@ const newsArticles: NewsArticle[] = await fetchNews();
       <path d="M4 18h4"></path>
     </svg>
   </a>
-  <a href="#profile" class="nav-item" data-label="Profile">
+  <button class="menu-btn nav-item" id="menu-toggle" data-label="Menu">
     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 12c2.28 0 4-1.72 4-4s-1.72-4-4-4-4 1.72-4 4 1.72 4 4 4z"></path>
-      <path d="M4 20c0-2.84 3.58-5 8-5s8 2.16 8 5"></path>
+      <line x1="4" y1="12" x2="20" y2="12"></line>
+      <line x1="4" y1="6" x2="20" y2="6"></line>
+      <line x1="4" y1="18" x2="20" y2="18"></line>
     </svg>
-  </a>
+  </button>
 </nav>
+
     <Footer />
+
+<script>
+// Add functionality for the menu button
+const menuToggle = document.getElementById("menu-toggle");
+const menu = document.getElementById("main-menu");
+const menuClose = document.getElementById("menu-close");
+
+menuToggle.addEventListener("click", () => {
+  menu.classList.add("active");
+});
+
+menuClose.addEventListener("click", () => {
+  menu.classList.remove("active");
+});
+
+document.addEventListener("click", (e) => {
+  if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
+    menu.classList.remove("active");
+  }
+});
+</script>
   </body>
 </html>
