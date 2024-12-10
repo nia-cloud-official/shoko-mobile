@@ -7,13 +7,16 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { fetchNews } from '../../utils/fetchNews';  // Import the fetchNews function
 
-// Fetch the local blog posts
+// Fetch the local blog posts (Markdown-based)
 const posts = (await getCollection('blog')).sort(
   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
 
-// Fetch the news articles from the API
+// Fetch the news articles from the Currents API
 const newsArticles = await fetchNews();
+
+// Debugging: Log the fetched news articles
+console.log('News Articles:', newsArticles);
 ---
 
 <!doctype html>
@@ -26,24 +29,29 @@ const newsArticles = await fetchNews();
     <main>
       <div class="w-max m-auto">
         <ul class="">
-          <!-- Render News Articles -->
+
+          <!-- Render News Articles from Currents API -->
           {
-            newsArticles.map((article) => (
-              <li class="">
-                <a href={article.url} target="_blank">
-                  <img 
-                    width={720} 
-                    height={360} 
-                    src={article.urlToImage || '/default-image.jpg'}  // Default image if none provided
-                    alt={article.title}
-                  />
-                  <h4 class="title">{article.title}</h4>
-                  <p class="date">
-                    {new Date(article.publishedAt).toLocaleDateString()}
-                  </p>
-                </a>
-              </li>
-            ))
+            newsArticles.length > 0 ? (
+              newsArticles.map((article) => (
+                <li class="">
+                  <a href={article.url} target="_blank">
+                    <img 
+                      width={720} 
+                      height={360} 
+                      src={article.image || '/default-image.jpg'}  // Use a default image if none provided
+                      alt={article.title}
+                    />
+                    <h4 class="title">{article.title}</h4>
+                    <p class="date">
+                      {new Date(article.published).toLocaleDateString()}
+                    </p>
+                  </a>
+                </li>
+              ))
+            ) : (
+              <p>No news articles available at the moment.</p>
+            )
           }
 
           <!-- Render Markdown-based Blog Posts -->
