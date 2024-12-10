@@ -15,7 +15,8 @@ const sideHero1 = posts.find((post) => post.data.isSideHero1);
 const sideHero2 = posts.find((post) => post.data.isSideHero2);
 
 // Fetch the news articles from the Currents API
-const newsArticles = await fetchNews();
+// const newsArticles = await fetchNews();
+const newsArticles: NewsArticle[] = await fetchNews();
 ---
 
 <!doctype html>
