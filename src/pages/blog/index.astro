@@ -15,15 +15,13 @@ const posts = (await getCollection('blog')).sort(
 // Fetch the news articles from the Currents API
 const newsArticles = await fetchNews();
 
-// Debugging: Log the fetched news articles
-console.log('News Articles:', newsArticles);
+console.log('News Articles:', newsArticles); // Log the fetched news to see if it's working
 
-// Define the type for the news articles for TypeScript
 type NewsArticle = {
   title: string;
   published: string;
   url: string;
-  image: string | null;  
+  image: string | null;  // image can be null if no image is provided
 };
 
 ---
@@ -48,7 +46,7 @@ type NewsArticle = {
                     <img 
                       width={720} 
                       height={360} 
-                      src={article.image || 'https://media.istockphoto.com/id/1197831888/vector/male-hand-holding-megaphone-with-breaking-news-speech-bubble-loudspeaker-banner-for-business.jpg'}
+                      src={article.image || '/default-image.jpg'}
                       alt={article.title}
                     />
                     <h4 class="title">{article.title}</h4>
