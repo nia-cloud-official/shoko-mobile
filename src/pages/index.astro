@@ -674,26 +674,5 @@ const newsArticles: NewsArticle[] = await fetchNews();
 </nav>
 
     <Footer />
-
-<script>
-// Add functionality for the menu button
-const menuToggle = document.getElementById("menu-toggle");
-const menu = document.getElementById("main-menu");
-const menuClose = document.getElementById("menu-close");
-
-menuToggle.addEventListener("click", () => {
-  menu.classList.add("active");
-});
-
-menuClose.addEventListener("click", () => {
-  menu.classList.remove("active");
-});
-
-document.addEventListener("click", (e) => {
-  if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
-    menu.classList.remove("active");
-  }
-});
-</script>
   </body>
 </html>
