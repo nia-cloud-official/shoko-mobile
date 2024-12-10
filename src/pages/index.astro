@@ -6,14 +6,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 import { fetchNews } from '../utils/fetchNews';  // Import the fetchNews function
 
-// Define an interface for the news articles
-interface NewsArticle {
-  url: string;
-  image?: string;
-  title: string;
-  published: string;
-}
-
 // Fetch the blog posts (Markdown-based)
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -99,11 +91,11 @@ const newsArticles = await fetchNews();
 				<div class="overflow-x-auto flex gap-4 md:gap-6 justify-start md:justify-center scroll-smooth pb-4">
 					
 					{/* Render News Articles */}
-					{newsArticles.map((article: NewsArticle) => (
+					{newsArticles.map((article) => (
 						<div key={article.url} class="flex-shrink-0 w-[300px] md:w-[350px] bg-gray-800 rounded-2xl p-4 space-y-2">
 							<a href={article.url} target="_blank">
 								<img 
-									src={article.image || 'https://media.istockphoto.com/id/1197831888/vector/male-hand-holding-megaphone-with-breaking-news-speech-bubble-loudspeaker-banner-for-business.jpg'} 
+									src={article.image || '/default-image.jpg'} 
 									alt={article.title} 
 									class="w-full h-48 object-cover rounded-lg mb-2"
 								/>
