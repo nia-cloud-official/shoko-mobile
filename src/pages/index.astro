@@ -281,17 +281,21 @@ const newsArticles: NewsArticle[] = await fetchNews();
         font-size: 1.2rem;
         font-weight: bold;
       }
-
-  /*    .card-content a {
-        color: #fff;
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-        border: 1px solid #ff8800;
-        border-radius: 8px;
-        margin-top: 1rem;
-        text-align: center;
-        transition: all 0.3s;
-      } */
+.card-content a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
 /* Main Menu Styles */
 .menu {
   position: fixed;
