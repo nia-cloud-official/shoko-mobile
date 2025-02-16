@@ -1,1 +1,0 @@
-## Shoko News Mobile App
